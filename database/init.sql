@@ -1,0 +1,63 @@
+-- Create users table
+CREATE TABLE users (
+    userId SERIAL PRIMARY KEY,
+    email VARCHAR(50) UNIQUE NOT NULL,
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    isSoleTrader BOOLEAN DEFAULT FALSE,
+    ratings INTEGER[] DEFAULT '{}',
+    serviceOffered VARCHAR(50) NOT NULL DEFAULT '',
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create listings table
+CREATE TABLE listings (
+    listingId SERIAL PRIMARY KEY,
+    customerId INT REFERENCES users(userId),
+    title VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    serviceRequired VARCHAR(50) NOT NULL,
+    status VARCHAR(20) DEFAULT 'active', -- active, completed
+    location VARCHAR(100) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create quotes table
+CREATE TABLE quotes (
+    quoteId SERIAL PRIMARY KEY,
+    listingId INT REFERENCES listings(listingId),
+    soleTraderId INT REFERENCES users(userId),
+    customerId INT REFERENCES users(userId),
+    description TEXT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    date DATE NOT NULL,
+    status VARCHAR(20) DEFAULT 'pending', -- pending, accepted
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert sample users
+INSERT INTO users (email, firstName, lastName, password, isSoleTrader, ratings, serviceOffered) VALUES
+    ('john.smith@example.com', 'John', 'Smith', 'password123', false, '{}', ''),
+    ('sarah.jones@example.com', 'Sarah', 'Jones', 'password456', false, '{}', ''),
+    ('plumber.pro@example.com', 'Mike', 'Johnson', 'secure789', true, '{4,5,5,4,5}', 'Plumbing'),
+    ('electric.expert@example.com', 'David', 'Williams', 'secure101', true, '{5,4,5,5,5}', 'Electrical'),
+    ('carpenter.craft@example.com', 'James', 'Brown', 'secure202', true, '{5,5,4,5}', 'Carpentry'),
+    ('painter.perfect@example.com', 'Lisa', 'Davis', 'secure303', true, '{4,4,5,4}', 'Painting'),
+    ('lawn.care@example.com', 'Robert', 'Miller', 'secure404', true, '{5,3,4,5,5}', 'Lawn Care');
+
+-- Insert sample listings
+INSERT INTO listings (customerId, title, description, serviceRequired, location) VALUES
+    (1, 'Bathroom Sink Leak', 'My bathroom sink has been leaking for a few days and needs repair.', 'Plumbing', 'New York, NY'),
+    (1, 'Kitchen Remodel', 'Looking for a skilled carpenter to remodel my kitchen cabinets.', 'Carpentry', 'New York, NY'),
+    (2, 'House Painting', 'Need to paint the exterior of my 2-story house.', 'Painting', 'Los Angeles, CA'),
+    (2, 'Electrical Outlet Installation', 'Need to install 5 new outlets in my home office.', 'Electrical', 'Los Angeles, CA'),
+    (1, 'Lawn Mowing Service', 'Looking for regular lawn mowing for my 1/4 acre yard.', 'Lawn Care', 'Chicago, IL');
+
+-- Insert sample quotes
+INSERT INTO quotes (listingId, soleTraderId, customerId, description, price, date, status) VALUES
+    (1, 3, 1, 'I can fix your bathroom sink leak. Will bring all necessary tools and parts.', 125.00, '2025-04-05', 'pending'),
+    (2, 5, 1, 'I specialize in kitchen remodels and can help with your cabinets. Would need to see the space first.', 1500.00, '2025-04-10', 'pending'),
+    (3, 6, 2, 'I offer professional painting services and can paint your house exterior. Price includes paint and supplies.', 2200.00, '2025-04-15', 'pending'),
+    (4, 4, 2, 'I can install the 5 outlets in your home office. Price includes parts and labor.', 450.00, '2025-04-07', 'accepted'),
+    (5, 7, 1, 'I provide weekly lawn mowing services. Price is per visit.', 45.00, '2025-04-20', 'pending');
