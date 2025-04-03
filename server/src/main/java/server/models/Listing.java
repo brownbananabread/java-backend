@@ -25,63 +25,34 @@ public class Listing {
         this.location = location;
     }
 
-    // Default constructor required by JPA
-    public Listing() {
-    }
+    public Listing() {}
 
-    public Integer getListingId() {
-        return listingId;
-    }
+    
+    // listingId
+    public Integer getListingId() { return listingId; }
+    public void setListingId(Integer listingId) { this.listingId = listingId; }
 
-    public void setListingId(Integer listingId) {
-        this.listingId = listingId;
-    }
+    // customerId
+    public Integer getCustomerId() { return customerId; }
+    public void setCustomerId(Integer customerId) { this.customerId = customerId; }
 
-    public Integer getCustomerId() {
-        return customerId;
-    }
+    // title
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
+    // description
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public String getTitle() {
-        return title;
-    }
+    // serviceRequired
+    public String getServiceRequired() { return serviceRequired; }
+    public void setServiceRequired(String serviceRequired) { this.serviceRequired = serviceRequired; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    // status
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getServiceRequired() {
-        return serviceRequired;
-    }
-
-    public void setServiceRequired(String serviceRequired) {
-        this.serviceRequired = serviceRequired;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
+    // location
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
 }

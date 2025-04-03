@@ -1,7 +1,6 @@
 package server.models;
 
 import jakarta.persistence.Entity;
-
 import java.util.Date;
 import jakarta.persistence.Id;
 
@@ -32,78 +31,41 @@ public class Quote {
         this.createdAt = createdAt;
     }
 
-    // Default constructor required by JPA
-    public Quote() {
-    }
+    public Quote() {}
 
+    // quoteId
+    public Integer getQuoteId() { return quoteId; }
+    public void setQuoteId(Integer quoteId) { this.quoteId = quoteId; }
 
-    public Integer getCustomerId() {
-        return customerId;
-    }
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
-    public Integer getQuoteId() {
-        return quoteId;
-    }
+    // listingId
+    public Integer getListingId() { return listingId; }
+    public void setListingId(Integer listingId) { this.listingId = listingId; }
 
-    public void setQuoteId(Integer quoteId) {
-        this.quoteId = quoteId;
-    }
+    // soleTraderId
+    public Integer getSoleTraderId() { return soleTraderId; }
+    public void setSoleTraderId(Integer soleTraderId) { this.soleTraderId = soleTraderId; }
 
-    public Integer getListingId() {
-        return listingId;
-    }
+    // customerId
+    public Integer getCustomerId() { return customerId; }
+    public void setCustomerId(Integer customerId) { this.customerId = customerId; }
 
-    public void setListingId(Integer listingId) {
-        this.listingId = listingId;
-    }
+    // description
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public Integer getSoleTraderId() {
-        return soleTraderId;
-    }
+    // price
+    public Double getPrice() { return price; }
+    public void setPrice(Double price) { this.price = price; }
 
-    public void setSoleTraderId(Integer soleTraderId) {
-        this.soleTraderId = soleTraderId;
-    }
+    // date
+    public Date getDate() { return date; }
+    public void setDate(Date date) { this.date = date; }
 
-    public String getDescription() {
-        return description;
-    }
+    // status
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+    // createdAt
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 }

@@ -13,90 +13,51 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-    private boolean isSoleTrader;
-    private int[] ratings;
+    private String role;
     private String serviceOffered;
     private Date createdAt;
 
-    public User(Integer userId, String email, String firstName, String lastName, String password, boolean isSoleTrader, int[] ratings, String serviceOffered, Date createdAt) {
+    public User(Integer userId, String email, String firstName, String lastName, String password, String role, String serviceOffered, Date createdAt) {
         this.userId = userId;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.isSoleTrader = isSoleTrader;
-        this.ratings = ratings;
+        this.role = role;
         this.serviceOffered = serviceOffered;
         this.createdAt = createdAt;
     }
-    public User() {
-        // Default constructor for JPA
-    }
+    public User() {}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-    public String getServiceOffered() {
-        return serviceOffered;
-    }
-    public void setServiceOffered(String serviceOffered) {
-        this.serviceOffered = serviceOffered;
-    }
-    public int[] getRatings() {
-        return ratings;
-    }
-    public void setRatings(int[] ratings) {
-        this.ratings = ratings;
-    }
+    // userId
+    public Integer getUserId() { return userId; }
+    public void setUserId(Integer userId) { this.userId = userId; }
 
-    public String getEmail() {
-        return email;
-    }
+    // email
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    // firstName
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    // lastName
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public String getPassword() {
-        return password;
-    }
+    // password
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public boolean isSoleTrader() {
-        return isSoleTrader;
-    }
+    // role
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 
-    public Integer getUserId() {
-        return userId;
-    }
+    // serviceOffered
+    public String getServiceOffered() { return serviceOffered; }
+    public void setServiceOffered(String serviceOffered) { this.serviceOffered = serviceOffered; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setSoleTrader(boolean isSoleTrader) {
-        this.isSoleTrader = isSoleTrader;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    // createdAt
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 }

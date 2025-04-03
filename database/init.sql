@@ -4,10 +4,9 @@ CREATE TABLE users (
     email VARCHAR(50) UNIQUE NOT NULL,
     firstName VARCHAR(100) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
-    password VARCHAR(100) NOT NULL,
-    isSoleTrader BOOLEAN DEFAULT FALSE,
-    ratings INTEGER[] DEFAULT '{}',
-    serviceOffered VARCHAR(50) NOT NULL DEFAULT '',
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(10) CHECK (role IN ('admin', 'soleTrader', 'customer')) NOT NULL DEFAULT 'customer',
+    serviceOffered VARCHAR(50) NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -36,15 +35,24 @@ CREATE TABLE quotes (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert sample users
-INSERT INTO users (email, firstName, lastName, password, isSoleTrader, ratings, serviceOffered) VALUES
-    ('john.smith@example.com', 'John', 'Smith', 'password123', false, '{}', ''),
-    ('sarah.jones@example.com', 'Sarah', 'Jones', 'password456', false, '{}', ''),
-    ('plumber.pro@example.com', 'Mike', 'Johnson', 'secure789', true, '{4,5,5,4,5}', 'Plumbing'),
-    ('electric.expert@example.com', 'David', 'Williams', 'secure101', true, '{5,4,5,5,5}', 'Electrical'),
-    ('carpenter.craft@example.com', 'James', 'Brown', 'secure202', true, '{5,5,4,5}', 'Carpentry'),
-    ('painter.perfect@example.com', 'Lisa', 'Davis', 'secure303', true, '{4,4,5,4}', 'Painting'),
-    ('lawn.care@example.com', 'Robert', 'Miller', 'secure404', true, '{5,3,4,5,5}', 'Lawn Care');
+-- Create ratings table
+CREATE TABLE ratings (
+    ratingId SERIAL PRIMARY KEY,
+    receiverId INT REFERENCES users(userId), -- Fixed typo in column name
+    senderId INT REFERENCES users(userId),
+    rating INT CHECK (rating >= 1 AND rating <= 5), -- 5-star rating system
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert sample users first
+INSERT INTO users (email, firstName, lastName, password, role, serviceOffered) VALUES
+    ('john.smith@example.com', 'John', 'Smith', 'password123', 'admin', NULL),
+    ('sarah.jones@example.com', 'Sarah', 'Jones', 'password456', 'customer', NULL),
+    ('plumber.pro@example.com', 'Mike', 'Johnson', 'secure789', 'soleTrader', 'Plumbing'),
+    ('electric.expert@example.com', 'David', 'Williams', 'secure101', 'soleTrader', 'Electrical'),
+    ('carpenter.craft@example.com', 'James', 'Brown', 'secure202', 'soleTrader', 'Carpentry'),
+    ('painter.perfect@example.com', 'Lisa', 'Davis', 'secure303', 'soleTrader', 'Painting'),
+    ('lawn.care@example.com', 'Robert', 'Miller', 'secure404', 'soleTrader', 'Lawn Care');
 
 -- Insert sample listings
 INSERT INTO listings (customerId, title, description, serviceRequired, location) VALUES
@@ -61,3 +69,11 @@ INSERT INTO quotes (listingId, soleTraderId, customerId, description, price, dat
     (3, 6, 2, 'I offer professional painting services and can paint your house exterior. Price includes paint and supplies.', 2200.00, '2025-04-15', 'pending'),
     (4, 4, 2, 'I can install the 5 outlets in your home office. Price includes parts and labor.', 450.00, '2025-04-07', 'accepted'),
     (5, 7, 1, 'I provide weekly lawn mowing services. Price is per visit.', 45.00, '2025-04-20', 'pending');
+
+-- Insert ratings after users have been created
+INSERT INTO ratings (receiverId, senderId, rating) VALUES
+    (3, 1, 5),
+    (4, 2, 4),
+    (5, 1, 5),
+    (6, 2, 4),
+    (7, 1, 5);
