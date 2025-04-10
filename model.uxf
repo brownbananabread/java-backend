@@ -1,0 +1,138 @@
+<diagram program="umletino" version="15.1"><zoom_level>11</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>968</x><y>1265</y><w>264</w><h>308</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+USER
+--
+-userID: int
+- name: str
+- email: str
+- phone: str
+- address: str
+- createdAt: datetime
+- rating: str
+- paymentMethod: str
+
+--
++ updateProfile()
++ deleteAccount()
++ login()
++ logout()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>968</x><y>1562</y><w>143</w><h>121</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>110;10;10;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>869</x><y>1661</y><w>220</w><h>143</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+CUSTOMER
+--
+-role: customer
+--
++ createBooking()
++ updateBookingStatus()
++ makeReview()
++ sendMessage()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1111</x><y>1661</y><w>220</w><h>143</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+SOLE-TRADER
+--
+-role: sole-trader
+--
++ acceptBooking()
++ makeReview()
++ sendMessage()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1100</x><y>1562</y><w>143</w><h>121</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;110;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>836</x><y>1914</y><w>264</w><h>198</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+TICKET
+--
+- ticketID: int
+- customerID: int
+- soleTraderID: int
+- title: str
+- description: str
+- images: base64 str
+- date: datetime
+- serviceType: str</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1419</x><y>1474</y><w>264</w><h>154</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+MESSAGES
+--
+- messageID: int
+- senderID: int
+- recieverID: int
+- payload: str
+- timestamp: datetime
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1419</x><y>1232</y><w>264</w><h>154</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+RATING
+--
+- ratingID: int
+- senderID: int
+- recieverID: int
+- rating: str
+- timestamp: datetime
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>957</x><y>1793</y><w>66</w><h>143</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=1
+Makes</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1221</x><y>1419</y><w>220</w><h>154</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=1
+Send/Recieve</panel_attributes><additional_attributes>180;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1221</x><y>1298</y><w>220</w><h>154</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=1
+Has/Creates</panel_attributes><additional_attributes>180;10;10;120</additional_attributes></element><element><id>UMLNote</id><coordinates><x>1485</x><y>1815</y><w>440</w><h>154</h></coordinates><panel_attributes>Note..
+bg=blue
+
+Using a marketplace approach, a customer will create a listing
+(ticket) with details of the job they need completed. This will be 
+sent to sole-traders that offer that service and they can message
+the customer in the app. Once the customer and sole-trader
+accepts the listing (by clicking a button), it will be marked
+from 'pending' to 'approved'.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>143</y><w>627</w><h>308</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+User
+--
+- userId: int
+- email: String
+- firstName: String
+- lastName: String
+- password: String
+- role: String
+- serviceOffered: String
+- createdAt: Timestamp
+--
++ login(email: String, password: String): User
++ validate(email: String): User
++ register(firstName: String, lastName: String, email: String, password: String, role: String): User
++ getAllUsers(): List&lt;User&gt;
++ getSoleTraders(service: String): List&lt;User&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>99</x><y>583</y><w>473</w><h>275</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+Listing
+--
+- listingId: int
+- customerId: int
+- title: String
+- description: Text
+- serviceRequired: String
+- status: String
+- location: String
+- createdAt: Timestamp
+--
++ getActiveListingsForServiceType(serviceType: String): List&lt;Listing&gt;
++ getListingsForCustomer(customerId: Integer): List&lt;Listing&gt;
++ getAllListings(): List&lt;Listing&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>792</x><y>396</y><w>429</w><h>330</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+Quote
+--
+- quoteId: int
+- listingId: int
+- soleTraderId: int
+- customerId: int
+- description: Text
+- price: Decimal
+- date: Date
+- status: String
+- createdAt: Timestamp
+--
++ getAllQuotesPerUserId(userId: Integer): List&lt;Quote&gt;
++ getQuotesForCustomer(customerId: Integer): List&lt;Quote&gt;
++ getQuote(quoteId: Integer): Quote
++ acceptQuoteAndCompleteListing(quoteId: Integer): void
++ rejectQuote(quoteId: Integer): void
++ getAllQuotes(): List&lt;Quote&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1353</x><y>396</y><w>605</w><h>231</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+Rating
+--
+- ratingId: int
+- quoteId: int
+- customerId: int
+- soleTraderId: int
+- rating: int
+- comment: Text
+- createdAt: Timestamp
+--
++ rateUser(userTo: Integer, rating: Integer, userFrom: Integer, description: String): void
++ getRatingsForUser(userId: Integer): List&lt;Rating&gt;</panel_attributes><additional_attributes></additional_attributes></element></diagram>

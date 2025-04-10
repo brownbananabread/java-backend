@@ -34,24 +34,32 @@ public class RatingController {
     }
 
     @PostMapping("/ratings")
-    public ResponseEntity<?> getRatings(@CookieValue(name = "accessToken") String accessToken, 
-                                        @RequestBody Map<String, String> body) {
-        
+    public ResponseEntity<?> getRatings(@CookieValue(name = "accessToken") String accessToken,
+                                    @RequestBody Map<String, String> body) {
         User user = request.getUserFromToken(accessToken);
         if (user == null) { return Response.Unauthorized(); }
-
+        
         String userId = body.get("userId");
-        Integer rating = Integer.parseInt(body.get("rating"));
-
-        if (userId == null || rating == null) {
+        String ratingStr = body.get("rating");
+        String description = body.get("description");
+        
+        if (userId == null || ratingStr == null) {
             return Response.Bad(Map.of("Message","Invalid request"));
         }
-
-        User receiver = request.getUserFromToken(userId);
-        if (receiver == null) { return Response.Unauthorized(); }
-
-        ratingService.rateUser(receiver.getUserId(), rating, user.getUserId());
-        return Response.Ok(Map.of("Message","Rating added successfully"));
+        
+        try {
+            int rating = Integer.parseInt(ratingStr);
+            if (rating < 1 || rating > 5) {
+                return Response.Bad(Map.of("Message", "Rating must be between 1 and 5"));
+            }
+            
+            User receiver = request.getUserFromToken(userId);
+            if (receiver == null) { return Response.Unauthorized(); }
+            
+            ratingService.rateUser(receiver.getUserId(), rating, user.getUserId(), description);
+            return Response.Ok(Map.of("Message","Rating added successfully"));
+        } catch (NumberFormatException e) {
+            return Response.Bad(Map.of("Message", "Rating must be a valid number"));
+        }
     }
-
 }

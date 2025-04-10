@@ -7,15 +7,16 @@ import jakarta.persistence.Id;
 public class Listing {
 
     @Id
-    private Integer listingId;
-    private Integer customerId;
+    private int listingId;
+    private int customerId;
     private String title;
     private String description;
     private String serviceRequired;
     private String status;
     private String location;
+    private String createdAt;
 
-    public Listing(Integer listingId, Integer customerId, String title, String description, String serviceRequired, String status, String location) {
+    public Listing(int listingId, int customerId, String title, String description, String serviceRequired, String status, String location, String createdAt) {
         this.listingId = listingId;
         this.customerId = customerId;
         this.title = title;
@@ -23,18 +24,19 @@ public class Listing {
         this.serviceRequired = serviceRequired;
         this.status = status;
         this.location = location;
+        this.createdAt = createdAt;
     }
 
     public Listing() {}
 
     
     // listingId
-    public Integer getListingId() { return listingId; }
-    public void setListingId(Integer listingId) { this.listingId = listingId; }
+    public int getListingId() { return listingId; }
+    public void setListingId(int listingId) { this.listingId = listingId; }
 
     // customerId
-    public Integer getCustomerId() { return customerId; }
-    public void setCustomerId(Integer customerId) { this.customerId = customerId; }
+    public int getCustomerId() { return customerId; }
+    public void setCustomerId(int customerId) { this.customerId = customerId; }
 
     // title
     public String getTitle() { return title; }
@@ -55,4 +57,8 @@ public class Listing {
     // location
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
+
+    // createdAt
+    public String getCreatedAt() { return createdAt; }
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
 }

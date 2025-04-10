@@ -8,37 +8,43 @@ import java.util.Date;
 public class Rating {
 
     @Id
-    private Integer ratingId;
-    private Integer receiverId;
-    private Integer senderId;
-    private Integer rating;
+    private int ratingId;
+    private int receiverId;
+    private int senderId;
+    private int rating;
+    private String description;
     private Date createdAt;
 
-    public Rating(Integer ratingId, Integer receiverId, Integer senderId, Integer rating, Date createdAt) {
+    public Rating(int ratingId, int receiverId, int senderId, int rating, String description, Date createdAt) {
         this.ratingId = ratingId;
         this.receiverId = receiverId;
         this.senderId = senderId;
         this.rating = rating;
+        this.description = description;
         this.createdAt = createdAt;
     }
 
     public Rating() {}
 
     // ratingId
-    public Integer getRatingId() { return ratingId; }
-    public void setRatingId(Integer ratingId) { this.ratingId = ratingId; }
+    public int getRatingId() { return ratingId; }
+    public void setRatingId(int ratingId) { this.ratingId = ratingId; }
 
     // receiverId
-    public Integer getReceiverId() { return receiverId; }
-    public void setReceiverId(Integer receiverId) { this.receiverId = receiverId; }
+    public int getReceiverId() { return receiverId; }
+    public void setReceiverId(int receiverId) { this.receiverId = receiverId; }
 
     // senderId
-    public Integer getSenderId() { return senderId; }
-    public void setSenderId(Integer senderId) { this.senderId = senderId; }
+    public int getSenderId() { return senderId; }
+    public void setSenderId(int senderId) { this.senderId = senderId; }
 
     // rating
-    public Integer getRating() { return rating; }
-    public void setRating(Integer rating) { this.rating = rating; }
+    public int getRating() { return rating; }
+    public void setRating(int rating) { this.rating = rating; }
+
+    // description
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     // createdAt
     public Date getCreatedAt() { return createdAt; }

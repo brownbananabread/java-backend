@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public User register(String firstName, String lastName, String email, String password, String role) {
-        String sql = "INSERT INTO users (email, firstName, lastName, password, isBusinessAccount) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (email, firstName, lastName, password, role) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, email, firstName, lastName, password, role);
         return login(email, password);
     }
@@ -36,5 +36,17 @@ public class UserService {
         String sql = "SELECT * FROM users";
         List<User> users = jdbcTemplate.query(sql, RowMappers.getUserRowMapper());
         return users.isEmpty() ? null : users;
+    }
+
+    public List<User> getSoleTraders(String service) {
+        if (service == null || service.isEmpty()) {
+            String sql = "SELECT * FROM users WHERE role = 'soleTrader'";
+            List<User> users = jdbcTemplate.query(sql, RowMappers.getUserRowMapper());
+            return users.isEmpty() ? null : users;
+        } else {
+            String sql = "SELECT * FROM users WHERE role = 'soleTrader' AND serviceOffered = ?";
+            List<User> users = jdbcTemplate.query(sql, RowMappers.getUserRowMapper(), service);
+            return users.isEmpty() ? null : users;
+        }
     }
 }

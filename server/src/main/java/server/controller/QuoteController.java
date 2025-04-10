@@ -40,7 +40,7 @@ public class QuoteController {
 
     @GetMapping("/quote/{quoteId}/accept")
     public ResponseEntity<?> acceptQuote(@CookieValue(name = "accessToken") String accessToken,
-                                         @PathVariable Integer quoteId) {
+                                         @PathVariable int quoteId) {
 
         User user = request.getUserFromToken(accessToken);
         if (user == null) { return Response.Unauthorized(); }
@@ -58,7 +58,7 @@ public class QuoteController {
 
     @GetMapping("/quote/{quoteId}/reject")
     public ResponseEntity<?> rejectQuote(@CookieValue(name = "accessToken") String accessToken,
-                                         @PathVariable Integer quoteId) {
+                                         @PathVariable int quoteId) {
 
         User user = request.getUserFromToken(accessToken);
         if (user == null) { return Response.Unauthorized(); }

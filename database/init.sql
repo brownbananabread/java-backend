@@ -41,6 +41,7 @@ CREATE TABLE ratings (
     receiverId INT REFERENCES users(userId), -- Fixed typo in column name
     senderId INT REFERENCES users(userId),
     rating INT CHECK (rating >= 1 AND rating <= 5), -- 5-star rating system
+    description TEXT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -71,9 +72,10 @@ INSERT INTO quotes (listingId, soleTraderId, customerId, description, price, dat
     (5, 7, 1, 'I provide weekly lawn mowing services. Price is per visit.', 45.00, '2025-04-20', 'pending');
 
 -- Insert ratings after users have been created
-INSERT INTO ratings (receiverId, senderId, rating) VALUES
-    (3, 1, 5),
-    (4, 2, 4),
-    (5, 1, 5),
-    (6, 2, 4),
-    (7, 1, 5);
+INSERT INTO ratings (receiverId, senderId, rating, description) VALUES
+    (3, 1, 5, 'Great service! Fixed my sink quickly.'),
+    (4, 1, 4, 'Good job on the electrical work.'),
+    (5, 2, 5, 'The kitchen remodel looks amazing!'),
+    (6, 2, 3, 'The painting was okay, but could have been better.'),
+    (7, 1, 5, 'Lawn care is always on time and well done.'),
+    (3, 2, 4, 'Plumbing service was satisfactory.');

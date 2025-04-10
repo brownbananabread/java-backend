@@ -20,7 +20,7 @@ public class ListingService {
         return listings.isEmpty() ? null : listings;
     }
 
-    public List<Listing> getListingsForCustomer(Integer customerId) {
+    public List<Listing> getListingsForCustomer(int customerId) {
         String sql = "SELECT * FROM listings WHERE customerId = ?";
         List<Listing> listings = jdbcTemplate.query(sql, RowMappers.getListingRowMapper(), customerId);
         return listings.isEmpty() ? null : listings;

@@ -8,7 +8,7 @@ import java.util.Date;
 public class User {
 
     @Id
-    private Integer userId;
+    private int userId;
     private String email;
     private String firstName;
     private String lastName;
@@ -17,7 +17,7 @@ public class User {
     private String serviceOffered;
     private Date createdAt;
 
-    public User(Integer userId, String email, String firstName, String lastName, String password, String role, String serviceOffered, Date createdAt) {
+    public User(int userId, String email, String firstName, String lastName, String password, String role, String serviceOffered, Date createdAt) {
         this.userId = userId;
         this.email = email;
         this.firstName = firstName;
@@ -30,8 +30,8 @@ public class User {
     public User() {}
 
     // userId
-    public Integer getUserId() { return userId; }
-    public void setUserId(Integer userId) { this.userId = userId; }
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
 
     // email
     public String getEmail() { return email; }

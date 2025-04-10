@@ -34,11 +34,13 @@ public class UserController {
         String accessToken = String.valueOf(user.getUserId()); // Assuming userId is the accessToken
 
         ResponseCookie cookie = ResponseCookie.from("accessToken", accessToken)
-        .httpOnly(false)
-        .path("/")
-        .secure(true)
-        .sameSite("Strict")
-        .build();
+            .httpOnly(false)
+            .path("/")
+            .maxAge(24 * 60 * 60) // 1 day in seconds
+            .domain("") // Set your domain or leave empty for current domain
+            .secure(false) // Set to true in production with HTTPS
+            .sameSite("Lax") // Less restrictive than Strict
+            .build();
 
         return ResponseEntity.ok()
             .header(HttpHeaders.SET_COOKIE, cookie.toString())
@@ -74,8 +76,10 @@ public class UserController {
         ResponseCookie cookie = ResponseCookie.from("accessToken", accessToken)
         .httpOnly(false)
         .path("/")
-        .secure(true)
-        .sameSite("Strict")
+        .maxAge(24 * 60 * 60) // 1 day in seconds
+        .domain("") // Set your domain or leave empty for current domain
+        .secure(false) // Set to true in production with HTTPS
+        .sameSite("Lax") // Less restrictive than Strict
         .build();
     
         return ResponseEntity.ok()
@@ -92,12 +96,16 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<?> getAllUsers(@CookieValue(name = "accessToken") String accessToken) {
+    public ResponseEntity<?> getAllUsers(@CookieValue(name = "accessToken") String accessToken, 
+                                         @RequestParam(required = false) String service) {
+        
         User user = request.getUserFromToken(accessToken);
         if (user == null) { return Response.Unauthorized(); }
 
         switch (user.getRole()) {
             case "admin": return Response.Ok(userService.getAllUsers());
+            case "customer": return Response.Ok(userService.getSoleTraders(service));
+            case "soleTrader": return Response.Ok(userService.getSoleTraders(service));
             default: return Response.Unauthorized();
         }
     }

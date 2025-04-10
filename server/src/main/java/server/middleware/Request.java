@@ -13,7 +13,7 @@ public class Request {
     private JdbcTemplate jdbcTemplate;
 
     public User getUserFromToken(String accessToken) {
-        var userId = Integer.parseInt(accessToken); // Assuming accessToken is userId
+        int userId = Integer.parseInt(accessToken); // Assuming accessToken is userId
 
         String sql = "SELECT * FROM users WHERE userId = ?";
         List<User> users = jdbcTemplate.query(sql, RowMappers.getUserRowMapper(), userId);

@@ -8,17 +8,17 @@ import jakarta.persistence.Id;
 public class Quote {
 
     @Id
-    private Integer quoteId;
-    private Integer listingId;
-    private Integer soleTraderId;
-    private Integer customerId;
+    private int quoteId;
+    private int listingId;
+    private int soleTraderId;
+    private int customerId;
     private String description;
     private Double price;
     private Date date;
     private String status;
     private Date createdAt;
 
-    public Quote(Integer quoteId, Integer listingId, Integer customerId, Integer soleTraderId, String description, 
+    public Quote(int quoteId, int listingId, int customerId, int soleTraderId, String description, 
                 Double price, Date date, String status, Date createdAt) {
         this.quoteId = quoteId;
         this.listingId = listingId;
@@ -34,20 +34,20 @@ public class Quote {
     public Quote() {}
 
     // quoteId
-    public Integer getQuoteId() { return quoteId; }
-    public void setQuoteId(Integer quoteId) { this.quoteId = quoteId; }
+    public int getQuoteId() { return quoteId; }
+    public void setQuoteId(int quoteId) { this.quoteId = quoteId; }
 
     // listingId
-    public Integer getListingId() { return listingId; }
-    public void setListingId(Integer listingId) { this.listingId = listingId; }
+    public int getListingId() { return listingId; }
+    public void setListingId(int listingId) { this.listingId = listingId; }
 
     // soleTraderId
-    public Integer getSoleTraderId() { return soleTraderId; }
-    public void setSoleTraderId(Integer soleTraderId) { this.soleTraderId = soleTraderId; }
+    public int getSoleTraderId() { return soleTraderId; }
+    public void setSoleTraderId(int soleTraderId) { this.soleTraderId = soleTraderId; }
 
     // customerId
-    public Integer getCustomerId() { return customerId; }
-    public void setCustomerId(Integer customerId) { this.customerId = customerId; }
+    public int getCustomerId() { return customerId; }
+    public void setCustomerId(int customerId) { this.customerId = customerId; }
 
     // description
     public String getDescription() { return description; }

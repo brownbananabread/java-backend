@@ -21,7 +21,8 @@ public class RowMappers {
                         rs.getString("description"),
                         rs.getString("serviceRequired"),
                         rs.getString("status"),
-                        rs.getString("location")
+                        rs.getString("location"),
+                        rs.getString("createdAt")
                     );
         }
     }
@@ -68,6 +69,7 @@ public class RowMappers {
                         rs.getInt("receiverId"),
                         rs.getInt("senderId"),
                         rs.getInt("rating"),
+                        rs.getString("description"),
                         rs.getDate("createdAt")
                     );
         }

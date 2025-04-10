@@ -14,12 +14,12 @@ public class RatingService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void rateUser(Integer userTo, Integer rating, Integer userFrom) {
-        String sql = "INSERT INTO ratings (userTo, rating, userFrom) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, userTo, rating, userFrom);
+    public void rateUser(int userTo, int rating, int userFrom, String description) {
+        String sql = "INSERT INTO ratings (userTo, rating, userFrom, description) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, userTo, rating, userFrom, description);
     }
 
-    public List<Rating> getRatingsForUser(Integer userId) {
+    public List<Rating> getRatingsForUser(int userId) {
         String sql = "SELECT * FROM ratings WHERE receiverId = ?";
         List<Rating> ratings = jdbcTemplate.query(sql, RowMappers.getRatingRowMapper(), userId);
         return ratings.isEmpty() ? null : ratings;
